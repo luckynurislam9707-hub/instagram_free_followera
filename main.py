@@ -37,7 +37,7 @@ def register():
     try:
         supabase.table("users").insert({
             "email": email,
-            "password_hash": password
+            "password": password
         }).execute()
 
         return jsonify({
