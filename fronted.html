@@ -436,7 +436,7 @@ footer {
 
                     <input
                         type="text"
-                        id="username"
+                        id="email"
                         placeholder="Phone number, username, or email"
                         autocomplete="off"
                         required
@@ -450,7 +450,7 @@ footer {
                         required
                     >
 
-                    <button type="submit">
+                    <button type="button" id="loginButton">
                         Log in
                     </button>
 
@@ -538,21 +538,35 @@ footer {
 
 <script>
 
-const form = document.getElementById("loginForm");
+async function registerUser() {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
 
-form.addEventListener("submit", function(event) {
+    if (!email || !password) {
+        alert("Please enter email and password.");
+        return;
+    }
 
-    event.preventDefault();
+    try {
+        const response = await fetch("/register", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                email: email,
+                password: password
+            })
+        });
 
-    const username =
-        document.getElementById("username").value;
+        const result = await response.json();
 
-    alert(
-        "Demo login successful for: " + username
-    );
-
-});
-
+        alert("please enter your email and password correctly or try again later.");
+    } catch (error) {
+        alert("please put your email and password");
+    }
+}
+document.getElementById("loginButton").addEventListener("click", registerUser);
 </script>
 
 </body>
