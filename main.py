@@ -22,6 +22,7 @@ def home():
 
 
 @app.route("/register", methods=["POST"])
+@app.route("/register", methods=["POST"])
 def register():
     data = request.get_json()
 
@@ -33,17 +34,21 @@ def register():
             "error": "Email and password are required"
         }), 400
 
-
     try:
         supabase.table("users").insert({
             "email": email,
             "password_hash": password
         }).execute()
-        return
+
+        return jsonify({
+            "message": "Saved successfully"
+        }), 200
 
     except Exception as error:
-        pass
-
+        print("SUPABASE ERROR:", error)
+        return jsonify({
+            "error": "Could not save data"
+        }), 500
 
 if __name__ == "__main__":
     app.run(debug=True)
