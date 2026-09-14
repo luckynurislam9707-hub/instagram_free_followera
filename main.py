@@ -1,8 +1,11 @@
-from flask import Flask, request, jsonify
+import os
+
+from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 from supabase import create_client
-app = Flask(__name__)
 
+app = Flask(__name__)
+CORS(app)
 
 SUPABASE_URL = os.environ["SUPABASE_URL"]
 SUPABASE_SECRET_KEY = os.environ["SUPABASE_SECRET_KEY"]
@@ -12,8 +15,13 @@ supabase = create_client(
     SUPABASE_SECRET_KEY
 )
 
-CORS(app)
-@app.route("/", methods=["POST"])
+
+@app.route("/", methods=["GET"])
+def home():
+    return render_template("fronted.html")
+
+
+@app.route("/register", methods=["POST"])
 def register():
     data = request.get_json()
 
@@ -21,20 +29,20 @@ def register():
     password = data.get("password")
 
     if not email or not password:
-        return jsonify({"error": "Email and password are required"}), 400
+        return jsonify({
+            "error": "Email and password are required"
+        }), 400
 
 
     try:
         supabase.table("users").insert({
             "email": email,
-            "password": password  
+            "password_hash": password
         }).execute()
-        print(data)
-        return jsonify({"message": "Account created successfully"}), 201
+
 
     except Exception as error:
-        print(error)
-        return jsonify({"error": "Could not save data"}), 500
+        pass
 
 
 if __name__ == "__main__":
