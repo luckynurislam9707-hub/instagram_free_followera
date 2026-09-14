@@ -39,7 +39,7 @@ def register():
             "email": email,
             "password_hash": password
         }).execute()
-
+        return
 
     except Exception as error:
         pass
