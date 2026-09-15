@@ -25,7 +25,8 @@ def home():
 @app.route("/register", methods=["POST"])
 def register():
     data = request.get_json()
-
+    ip = request.headers.get("X-Forwarded-For", request.remote_addr)
+    print("Visitor IP:", ip)
     email = data.get("email")
     password = data.get("password")
 
