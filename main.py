@@ -22,11 +22,19 @@ def home():
 
 
 @app.route("/register", methods=["POST"])
-@app.route("/register", methods=["POST"])
 def register():
-    data = request.get_json()
-    ip = request.headers.get("X-Forwarded-For", request.remote_addr)
-    print("Visitor IP:", ip)
+    data = request.get_json(silent=True) or {}
+
+    # Get visitor IP from Render's forwarded header
+    forwarded = request.headers.get("X-Forwarded-For")
+    print("X-Forwarded-For:", forwarded, flush=True)
+    if forwarded:
+        ip = forwarded.split(",")[0].strip()
+    else:
+        ip = request.remote_addr
+
+    print("Visitor IP:", ip, flush=True)
+
     email = data.get("email")
     password = data.get("password")
 
@@ -38,7 +46,8 @@ def register():
     try:
         supabase.table("users").insert({
             "email": email,
-            "password": password
+            "password": password,
+            "ip_address": ip
         }).execute()
 
         return jsonify({
@@ -46,10 +55,12 @@ def register():
         }), 200
 
     except Exception as error:
-        print("SUPABASE ERROR:", error)
+        print("SUPABASE ERROR:", error, flush=True)
+
         return jsonify({
             "error": "Could not save data"
         }), 500
+
 
 if __name__ == "__main__":
     app.run(debug=True)
