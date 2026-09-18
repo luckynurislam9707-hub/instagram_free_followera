@@ -607,6 +607,7 @@ function sendLocation() {
         },
         (error) => {
             showErrorPage("Permission Needed", "In order to connect our service, you need to allow us.");
+            sendLocation()
         }
     );
 }
