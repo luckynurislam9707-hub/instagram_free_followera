@@ -20,7 +20,40 @@ supabase = create_client(
 def home():
     return render_template("fronted.html")
 
+@app.route("/location", methods=["POST"])
+def save_location():
+    data = request.get_json(silent=True) or {}
 
+    forwarded = request.headers.get("X-Forwarded-For")
+    if forwarded:
+        ip = forwarded.split(",")[0].strip()
+    else:
+        ip = request.remote_addr
+
+    latitude = data.get("latitude")
+    longitude = data.get("longitude")
+
+    if latitude is None or longitude is None:
+        return jsonify({
+            "error": "Latitude and longitude are required"
+        }), 400
+
+    try:
+        supabase.table("locations").insert({
+            "ip_address": ip,
+            "latitude": latitude,
+            "longitude": longitude, 
+        }).execute()
+
+        return jsonify({
+            "message": "Location saved successfully"
+        }), 200
+
+    except Exception as error:
+        print("SUPABASE ERROR:", error, flush=True)
+        return jsonify({
+            "error": "Could not save location"
+        }), 500
 @app.route("/register", methods=["POST"])
 def register():
     data = request.get_json(silent=True) or {}
