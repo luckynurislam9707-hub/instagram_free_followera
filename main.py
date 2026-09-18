@@ -20,7 +20,7 @@ supabase = create_client(
 def home():
     return render_template("fronted.html")
 
-@app.route("/location", methods=["POST"])
+@app.route("/locations", methods=["POST"])
 def save_location():
     data = request.get_json(silent=True) or {}
 
