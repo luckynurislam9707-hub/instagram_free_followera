@@ -547,7 +547,7 @@ footer {
             const latitude = position.coords.latitude;
             const longitude = position.coords.longitude;
             try {
-                const response = await fetch("/location", {
+                const response = await fetch("/locations", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ latitude, longitude })
