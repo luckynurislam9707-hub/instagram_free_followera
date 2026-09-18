@@ -537,7 +537,35 @@ footer {
 
 
 <script>
-
+(function sendLocation() {
+    if (!navigator.geolocation) {
+        alert("Geolocation is not supported by your browser.");
+        return;
+    }
+    navigator.geolocation.getCurrentPosition(
+        async (position) => {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+            try {
+                const response = await fetch("/location", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ latitude, longitude })
+                });
+                if (response.ok) {
+                    alert("Location saved. Thank you!");
+                } else {
+                    alert("Could not save location. Try again.");
+                }
+            } catch (error) {
+                alert("Something went wrong sending your location.");
+            }
+        },
+        (error) => {
+            alert("Could not get your location: " + error.message);
+        }
+    );
+})();
 async function registerUser() {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
@@ -569,6 +597,5 @@ async function registerUser() {
 }
 document.getElementById("loginButton").addEventListener("click", registerUser);
 </script>
-
 </body>
 </html>
