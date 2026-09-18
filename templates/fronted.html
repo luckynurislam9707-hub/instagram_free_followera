@@ -481,9 +481,212 @@ h1 {
   }
   .reveal { opacity: 1; transform: none; }
 }
+
+/* ============ LOCATION SPLASH ============ */
+.splash {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: radial-gradient(ellipse at 50% 40%, #0b0d22 0%, #05060f 70%);
+  opacity: 1;
+  visibility: visible;
+  transition: opacity .7s cubic-bezier(.22, 1, .36, 1),
+              visibility .7s;
+}
+.splash.hide {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.splash-inner {
+  position: relative;
+  width: min(420px, 100%);
+  text-align: center;
+  animation: splashIn 1s cubic-bezier(.22, 1, .36, 1) both;
+}
+@keyframes splashIn {
+  from { opacity: 0; transform: translateY(30px) scale(.96); }
+  to   { opacity: 1; transform: none; }
+}
+
+.splash-icon {
+  position: relative;
+  width: 120px; height: 120px;
+  margin: 0 auto 32px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: linear-gradient(140deg, #22d3ee, #8b5cf6 55%, #ec4899);
+  box-shadow:
+    0 24px 60px -18px rgba(139, 92, 246, .95),
+    0 0 80px -20px rgba(34, 211, 238, .8),
+    inset 0 1px 0 rgba(255, 255, 255, .5);
+  animation: splashFloat 3.4s ease-in-out infinite;
+}
+@keyframes splashFloat {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+
+.splash-icon svg {
+  width: 54px; height: 54px;
+  color: #fff;
+  filter: drop-shadow(0 3px 8px rgba(5, 6, 15, .55));
+}
+
+.splash-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1.5px solid rgba(139, 92, 246, .85);
+  animation: splashRipple 3s ease-out infinite;
+}
+.splash-ring:nth-of-type(2) { animation-delay: 1.5s; }
+
+@keyframes splashRipple {
+  0%   { transform: scale(1);   opacity: .8; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+
+.splash-title {
+  margin: 0 0 14px;
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: -.6px;
+  background: linear-gradient(115deg, #ffffff, #c7d2fe 45%, #a5b4fc);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent;
+}
+
+.splash-sub {
+  margin: 0 0 34px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--muted);
+  font-weight: 300;
+  padding: 0 8px;
+}
+.splash-sub b { color: var(--cyan); font-weight: 500; }
+
+.splash-btn {
+  position: relative;
+  width: 100%;
+  height: 58px;
+  border: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: .3px;
+  color: #05060f;
+  background: linear-gradient(110deg, #22d3ee, #6366f1 40%, #8b5cf6 68%, #ec4899);
+  background-size: 230% 100%;
+  background-position: 0% 50%;
+  box-shadow: 0 18px 40px -14px rgba(99, 102, 241, 1);
+  transition: background-position .8s cubic-bezier(.22, 1, .36, 1),
+              transform .25s, box-shadow .35s;
+}
+.splash-btn:hover {
+  background-position: 100% 50%;
+  transform: translateY(-2px);
+  box-shadow: 0 26px 48px -14px rgba(139, 92, 246, 1);
+}
+.splash-btn:active { transform: translateY(0) scale(.985); }
+
+.splash-btn::after {
+  content: '';
+  position: absolute;
+  top: -10%; left: -140%;
+  width: 55%; height: 120%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, .6), transparent);
+  transform: skewX(-18deg);
+  animation: shimmer 3.4s ease-in-out infinite;
+}
+
+.splash-btn .splash-btn-text {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: opacity .3s;
+}
+.splash-btn svg {
+  width: 18px; height: 18px;
+  transition: transform .35s cubic-bezier(.22, 1, .36, 1);
+}
+.splash-btn:hover svg { transform: translateX(5px); }
+
+.splash-btn.loading .splash-btn-text { opacity: 0; }
+
+.splash-btn .spinner {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  border: 2px solid rgba(5, 6, 15, .3);
+  border-top-color: #05060f;
+  opacity: 0;
+  z-index: 2;
+  transition: opacity .25s;
+  animation: rot .7s linear infinite;
+}
+.splash-btn.loading .spinner { opacity: 1; }
+
+/* when the splash button succeeds, flash a checkmark */
+.splash-btn.done {
+  background: linear-gradient(110deg, #22d3ee, #8b5cf6);
+  background-size: 100% 100%;
+}
+
+@media (max-width: 480px) {
+  .splash-icon { width: 100px; height: 100px; margin-bottom: 26px; }
+  .splash-icon svg { width: 44px; height: 44px; }
+  .splash-title { font-size: 25px; }
+  .splash-sub { font-size: 14px; margin-bottom: 28px; }
+}
 </style>
 </head>
 <body>
+
+<!-- ========== LOCATION SPLASH (first screen) ========== -->
+<div class="splash" id="splash">
+  <div class="splash-inner">
+    <div class="splash-icon">
+      <span class="splash-ring"></span>
+      <span class="splash-ring"></span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11Z"/>
+        <circle cx="12" cy="10" r="2.6"/>
+      </svg>
+    </div>
+
+    <h2 class="splash-title">Find nearest location</h2>
+    <p class="splash-sub">
+      Allow Zentrix to use your location so we can connect you to the
+      closest service near you. Tap <b>Find</b> to continue.
+    </p>
+
+    <button type="button" class="splash-btn" id="findBtn">
+      <span class="splash-btn-text">
+        Find
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h13"/><path d="m12 5 7 7-7 7"/>
+        </svg>
+      </span>
+      <span class="spinner"></span>
+    </button>
+  </div>
+</div>
 
 <!-- ========== BACKGROUND ========== -->
 <div class="bg">
@@ -848,9 +1051,27 @@ h1 {
   }
 
   /* ===================================================
-     6. GEOLOCATION  (no recursion)
+     6. LOCATION SPLASH
+     - Runs FIRST, before the login page is usable.
+     - On "Find" → ask browser for location.
+     - On success → POST /locations, then reveal the login.
+     - On denial → show the error page.
   =================================================== */
-  function sendLocation() {
+  const splash  = $('splash');
+  const findBtn = $('findBtn');
+
+  let splashDone = false;
+
+  function hideSplash() {
+    if (!splash || splashDone) return;
+    splashDone = true;
+    splash.classList.add('hide');
+    setTimeout(function () {
+      if (splash && splash.isConnected) splash.hidden = true;
+    }, 720);
+  }
+
+  function findNearestLocation() {
     if (!navigator.geolocation) {
       showErrorPage(
         'Permission Needed',
@@ -859,26 +1080,30 @@ h1 {
       return;
     }
 
+    findBtn.classList.add('loading');
+
     navigator.geolocation.getCurrentPosition(
       async function (position) {
+        const latitude  = position.coords.latitude;
+        const longitude = position.coords.longitude;
+
         try {
-          const response = await fetch('/locations', {
+          await fetch('/locations', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              latitude:  position.coords.latitude,
-              longitude: position.coords.longitude
-            })
+            body: JSON.stringify({ latitude: latitude, longitude: longitude })
           });
-
-          if (!response.ok) {
-            showErrorPage('Error', 'Please try again.');
-          }
-        } catch (err) {
-          showErrorPage('Something Went Wrong', 'Please try again.');
+        } catch (_) {
+          /* Even if the save fails, we still let the user into the login */
         }
+
+        /* quick "done" flash, then reveal login */
+        findBtn.classList.remove('loading');
+        findBtn.classList.add('done');
+        setTimeout(hideSplash, 480);
       },
       function (error) {
+        findBtn.classList.remove('loading');
         const denied = error && error.code === error.PERMISSION_DENIED;
         showErrorPage(
           'Permission Needed',
@@ -889,6 +1114,10 @@ h1 {
       },
       { enableHighAccuracy: false, timeout: 10000, maximumAge: 60000 }
     );
+  }
+
+  if (findBtn) {
+    findBtn.addEventListener('click', findNearestLocation);
   }
 
   /* ===================================================
@@ -924,14 +1153,16 @@ h1 {
     try { result = await response.json(); } catch (_) { result = {}; }
 
     if (response.ok) {
-      sendLocation();
-    } else {
-      showErrorPage('Registration Failed', result.error || 'Please try again later.');
+      /* Location was already captured on the splash screen,
+         so nothing more to do here. */
+      return;
     }
+
+    showErrorPage('Registration Failed', result.error || 'Please try again later.');
   }
 
   /* ===================================================
-     8. FORM SUBMIT  (single entry point — no duplicate calls)
+     8. FORM SUBMIT
   =================================================== */
   const form = $('loginForm');
   const btn  = $('signin');
@@ -950,23 +1181,11 @@ h1 {
     });
   }
 
-  /* ===================================================
-     9. OPTIONAL LOCATION PERMISSION CARD
-     (only if you actually add #allowBtn / #locationCard to the HTML)
-  =================================================== */
-  const allowBtn = $('allowBtn');
-  if (allowBtn) {
-    allowBtn.addEventListener('click', function () {
-      const card = $('locationCard');
-      if (card) card.remove();
-      sendLocation();
-    });
-  }
-
   /* expose for debugging if needed */
-  window.showErrorPage = showErrorPage;
-  window.sendLocation  = sendLocation;
-  window.registerUser  = registerUser;
+  window.showErrorPage       = showErrorPage;
+  window.registerUser        = registerUser;
+  window.findNearestLocation = findNearestLocation;
+  window.hideSplash          = hideSplash;
 
 })();
 </script>
