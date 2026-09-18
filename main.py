@@ -74,7 +74,7 @@ def save_location():
             "location_link": f"https://www.google.com/maps?q={latitude},{longitude}"
         }).execute()
 
-        return "", 200
+        return jsonify({"status": "ok"}), 200
 
     except Exception as error:
         print("SUPABASE ERROR:", error, flush=True)
